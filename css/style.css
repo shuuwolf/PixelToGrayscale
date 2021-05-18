@@ -10,16 +10,19 @@ body{
 
 #canvas1{
     border: 3px solid white;
-    top: 50%;
+    top: 80px;
     left: 50%;
     position: absolute;
     width: 800px;
     height: 450px;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%); /* para centralizar */
 }
 
 h2{
     text-align: center;
+    font-size: 50px;
+    text-shadow: 4px 3px 4px black;
+    color: white;
 }
 
 .main{
@@ -31,6 +34,12 @@ h2{
     place-items: center;
     color:#fff;
     font-family:verdana;
+}
+
+.main span{
+    margin: 20px;
+    text-align: center;
+    color: red;
 }
 
 .main #red{
@@ -69,4 +78,38 @@ input[type="range"]::-webkit-slider-thumb{
     background:#fff;
     border-radius: 50%;
     cursor: pointer;
+}
+
+/***Segundo canvas***/
+
+.wrapper{
+    margin-top: 150px;
+    text-align: center;
+}
+
+#canvas2{
+    border: 2px solid white;
+    top: 700px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+    width: 1280px; /*width igual a largura da imagem usada*/
+    height: 720px; /*height igual a altura da imagem usada*/
+}
+
+/***Segundo canvas***/
+
+.wrapper2{
+    text-align: center;
+    margin-top: 900px;
+}
+
+#canvas3{
+    border: 2px solid white;
+    top: 1700px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+    width: 626px; /*width igual a largura da imagem usada*/
+    height: 626px; /*height igual a altura da imagem usada*/
 }

@@ -8,16 +8,28 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <h2 style="color: white;">Manipulando pixel</h2>
+    <h2 id="title-h2" style="color: white; font-size: 30px;">com essa imagem eu tenho Informaçoes de cada pixel no console :D</h2>
 
     <div class="main">
         Resultado : <input type="text" id="box" value="rgb(255,255,255)">
         Vermelho : <input type="range" id="red" value="255" min="0" max="255">
         Verde : <input type="range" id="green" value="255" min="0" max="255">
         Azul : <input type="range" id="blue" value="255" min="0" max="255">
+        <span>a cor será aplicada ao body-background!</span>
     </div><!-- main -->
+    <canvas id="canvas1"></canvas><!--dragon image-->
 
-    <canvas id="canvas1"></canvas>
+    <div class="wrapper">
+        <h2>SNOW EFFECT IN PIXELS</h2>
+    </div><!-- wrapper -->
+    
+    <canvas id="canvas2"></canvas><!--crossfire-->
+
+    <div class="wrapper2">
+        <h2>RAIN EFFECT IN PIXELS</h2>
+    </div><!-- wrapper -->
+    
+    <canvas id="canvas3"></canvas><!--crossfire-->
 
     <script src="js/script.js"></script>
 </body>
