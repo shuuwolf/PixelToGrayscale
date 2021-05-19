@@ -185,3 +185,100 @@ image1.addEventListener('load', function(){ /* sem esse evento a imagem não apa
         }
         animate();
     });
+
+    /*quarto canvas*/
+
+    const canvas4 = document.getElementById('canvas4');
+    const ctx4 = canvas4.getContext('2d');
+    canvas4.width = window.innerWidth;
+    canvas4.height = window.innerHeight;
+    let particleArrayText = [];
+
+    //mouse
+    const mouse = {
+        x: null,
+        y: null,
+        radius: 250
+    }
+
+    window.addEventListener('mousemove', function(event){
+        mouse.x = event.x;
+        mouse.y = event.y;
+        //console.log(mouse.x, mouse.y);
+    })
+
+    ctx4.fillStyle = 'white';
+    ctx4.font = '30px Verdana';
+    ctx4.fillText('ShuuWolf', 60, 30);//o texto escrito no canvas!.
+    ctx4.fillStyle2 = 'white';
+    ctx4.font = '30px Verdana';
+    ctx4.fillText('NeverWinter', 35, 90);//o texto escrito no canvas!.
+    const textCoordinates = ctx4.getImageData(0, 0, 300, 300);//refere-se ao tamanho limite dentro do canvas, deixar pouco, acaba cortando o texto.
+
+    class ParticleText{
+        constructor(x, y){
+            this.x = x;
+            this.y = y;
+            this.size = 3;
+            this.baseX = this.x;
+            this.baseY = this.y;
+            this.density = (Math.random() * 40) + 5;
+        }
+        draw(){
+            ctx4.fillStyle = "red";//cor do texto
+            ctx4.beginPath();
+            ctx4.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx4.closePath();
+            ctx4.fill();
+        }
+        update(){
+            let dx = mouse.x - this.x + 15;//coloquei esse valor a mais, para ficar centralizado no ponteiro do mouse
+            let dy = mouse.y - this.y - 120;//coloquei esse valor a menos, para ficar centralizado no ponteiro do mouse
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            let forceDirectionX = dx / distance;
+            let forceDirectionY = dy / distance;
+            let maxDistance = mouse.radius;
+            let force = (maxDistance - distance) / maxDistance;
+            let directionX = forceDirectionX * force * this.density;
+            let directionY = forceDirectionY * force * this.density;
+            if(distance < mouse.radius){
+                this.x -= directionX;
+                this.y -= directionY;
+            }else{
+                if(this.x !== this.baseX){
+                    let dx = this.x - this.baseX;
+                    this.x -= dx/10;
+                }
+                if(this.y !== this.baseY){
+                    let dy = this.y - this.baseY;
+                    this.y -= dy/10;
+                }
+            }
+        }
+    }
+
+function initText(){
+    particleArrayText = [];
+    for (let y = 0, y2 = textCoordinates.height; y < y2; y++){
+        for (let x = 0, x2 = textCoordinates.width; x < x2; x++){
+            if(textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128){ // pula os 3 primeiros valores, e pega o 4º valor referente a opacidade(rgb"a").
+                let positionX = x;
+                let positionY = y;
+                particleArrayText.push(new ParticleText(positionX * 10, positionY * 10));
+            }
+        }
+    }
+}
+
+initText();
+console.log(particleArrayText);
+
+function animateText(){
+    ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
+    for(let i = 0; i < particleArrayText.length; i++){
+        particleArrayText[i].draw();
+        particleArrayText[i].update();
+    }
+    requestAnimationFrame(animateText);
+}
+animateText();
