@@ -122,7 +122,6 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 #canvas4{
-    border: 2px solid white;
     top: 2500px;
     left: 50%;
     position: absolute;
